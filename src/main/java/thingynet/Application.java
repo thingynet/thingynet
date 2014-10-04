@@ -18,49 +18,15 @@
 
 package thingynet;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-@Configuration
 @EnableAutoConfiguration
 @ComponentScan
 public class Application {
 
-    @Value("${application.pool.size}")
-    private int applicationPoolSize;
-
-//    @Autowired
-//    private WorkflowService workflowService;
-//
-//    @Autowired
-//    private WorkflowMonitor workflowMonitor;
-
     public static void main(String[] args) throws Exception {
         SpringApplication.run(Application.class, args);
-    }
-
-    @Bean
-    public ExecutorService workerExecutorService() {
-        ExecutorService executorService = Executors.newFixedThreadPool(applicationPoolSize);
-        System.out.println("POOL SIZE:" + applicationPoolSize);
-
-        for (int i = 0; i < applicationPoolSize; i++) {
-//            executorService.submit(workflowService);
-        }
-        return executorService;
-    }
-
-    @Bean
-    public ExecutorService monitorExecutorService() {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-//        executorService.submit(workflowMonitor);
-        return executorService;
     }
 }
